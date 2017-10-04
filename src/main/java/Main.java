@@ -54,6 +54,7 @@ public class Main {
         String itemId = UUID.randomUUID().toString();
         commandGateway.send(new CreateMessageCommand(itemId, "Hello, how is your day?"));
         commandGateway.send(new MarkReadMessageCommand(itemId));
+        commandGateway.send(new CreateMessageCommand(itemId, "This is too long text to instantiate InputException."));
     }
 
 }

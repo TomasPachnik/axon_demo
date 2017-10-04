@@ -4,6 +4,7 @@ import commands.CreateMessageCommand;
 import commands.MarkReadMessageCommand;
 import events.MessageCreatedEvent;
 import events.MessageReadEvent;
+import exceptions.InputException;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.eventhandling.EventHandler;
@@ -20,6 +21,7 @@ public class MessagesAggregate {
 
     @CommandHandler
     public MessagesAggregate(CreateMessageCommand command) {
+        validateInput(command);
         apply(new MessageCreatedEvent(command.getId(), command.getText()));
     }
 
@@ -32,4 +34,11 @@ public class MessagesAggregate {
     public void on(MessageCreatedEvent event) {
         this.id = event.getId();
     }
+
+    private void validateInput(CreateMessageCommand command){
+        if(command.getText().length()> 30){
+            throw new InputException("'" + command.getText() + "' is too long!");
+        }
+    }
+
 }
