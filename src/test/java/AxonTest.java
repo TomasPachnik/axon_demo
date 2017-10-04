@@ -1,3 +1,4 @@
+import aggregates.MessagesAggregate;
 import commands.CreateMessageCommand;
 import commands.MarkReadMessageCommand;
 import events.MessageCreatedEvent;

@@ -1,3 +1,5 @@
+package aggregates;
+
 import commands.CreateMessageCommand;
 import commands.MarkReadMessageCommand;
 import events.MessageCreatedEvent;
@@ -21,13 +23,13 @@ public class MessagesAggregate {
         apply(new MessageCreatedEvent(command.getId(), command.getText()));
     }
 
-    @EventHandler
-    public void on(MessageCreatedEvent event) {
-        this.id = event.getId();
-    }
-
     @CommandHandler
     public void markRead(MarkReadMessageCommand command) {
         apply(new MessageReadEvent(id));
+    }
+
+    @EventHandler
+    public void on(MessageCreatedEvent event) {
+        this.id = event.getId();
     }
 }
