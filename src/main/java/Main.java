@@ -47,10 +47,10 @@ public class Main {
             }
         }));
 
-        someCommants();
+        someCommands();
     }
 
-    private static void someCommants(){
+    private static void someCommands(){
         String itemId = UUID.randomUUID().toString();
         commandGateway.send(new CreateMessageCommand(itemId, "Hello, how is your day?"));
         commandGateway.send(new MarkReadMessageCommand(itemId));
